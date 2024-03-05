@@ -10,6 +10,7 @@ export async function createUser(user: CreateUserParams) {
   try {
     await connectToDatabase();
 
+    // Creates a new user in the database that contains all the info which was captured when the user logged in via Clerk
     const newUser = await User.create(user);
 
     return JSON.parse(JSON.stringify(newUser));

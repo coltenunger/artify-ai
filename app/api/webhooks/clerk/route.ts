@@ -59,9 +59,11 @@ export async function POST(req: Request) {
 
   // CREATE
   if (eventType === "user.created") {
+    // Deconstructing all info about user from evt.data
     const { id, email_addresses, image_url, first_name, last_name, username } =
       evt.data;
 
+    //   Storing that information as an object within a variable
     const user = {
       clerkId: id,
       email: email_addresses[0].email_address,
@@ -71,10 +73,18 @@ export async function POST(req: Request) {
       photo: image_url,
     };
 
+    // You can remove this after viewing it
+    console.log(
+      "UNDER CREATE - This is the event data that contains all the info about the user that logged in:",
+      user
+    );
+
+    // Calling createUser
     const newUser = await createUser(user);
 
     // Set public metadata
     if (newUser) {
+      // Merges clerkId with userId
       await clerkClient.users.updateUserMetadata(id, {
         publicMetadata: {
           userId: newUser._id,
@@ -82,6 +92,7 @@ export async function POST(req: Request) {
       });
     }
 
+    // Returns OK message
     return NextResponse.json({ message: "OK", user: newUser });
   }
 
