@@ -16,6 +16,3 @@ tailwind.config.ts
 
     Will the connection to a MySQL database persist unlike the MongoDB connection?
 }
-
-mongoDB pass: 3rKXuqnvSn1qmlAM
-Url vercel app: https://artify-ai-rho.vercel.app/
